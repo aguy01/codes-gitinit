@@ -1,0 +1,26 @@
+git init
+git status
+git add .
+git commit -m "Codes added"
+git remote add origin https://github.com/aguy01/codes-gitinit.git
+git push origin master
+
+//Print all  integers in  in reverse order as a single line of space-separated integers.
+public class Area {
+    public static void main(String[] args) {
+        ArrayList<Integer> alist = new ArrayList<>();
+        Integer numtolist = 0, listsize = 0;
+        Scanner in = new Scanner(System.in);
+        listsize = in.nextInt();
+
+        for (int i = 0; i < listsize; i++) {
+
+            numtolist = in.nextInt();
+            alist.add(numtolist);
+        }
+
+        for (int i = alist.size()-1; i >=0; i--) {
+            System.out.print(alist.get(i)+" ");
+
+        }
+    }}
