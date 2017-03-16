@@ -419,3 +419,63 @@ public class TechJobs {
     }
 }
 
+
+-------------------
+public class BankAccount {
+
+private String firstName;
+private String lastName;
+private double balance;
+private int acctNumber;
+private static int nextAvailableAcctNumber =1;
+
+0 references
+public BankAccount(String firstName, String lastName, double initialBalance){
+
+	this.firstName=firstName;
+	this.lastName=lastname;
+	this.balance=initialBalance;
+	this.acctNumber=nextAvailableAcctNumber++;
+
+}
+
+0 references
+
+ public void depost(double value)
+{	this.balance +=value
+
+}
+
+pubic String getFirstName(){
+	return this.firstName;
+
+
+}
+
+0 references
+
+pubic String getLastName(){
+	return this.lastName;
+
+
+}
+
+
+public double getBalance() {
+return this.balance
+
+}
+
+
+
+
+}
+
+
+--------------------------
+public class BankAccountTester{
+public static void main (String[] args)
+{
+BankAccount ba1=new BankAccount("Matt","Orbet",5000.00)
+
+BankAccount ba2=new BankAccount("Rebecca","Wagman",6000.00)
