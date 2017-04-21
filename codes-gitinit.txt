@@ -1,8 +1,8 @@
 git init
 git status
 git add .
-git commit -m "Codes added"
-git remote add origin https://github.com/aguy01/codes-gitinit.git
+git commit -m "Tasks completed"
+git remote add origin https://github.com/aguy01/techjobs-oo.git //line not needed if already forked thru the intellijide
 git push origin master
 
 //Print all  integers in  in reverse order as a single line of space-separated integers.
@@ -479,3 +479,71 @@ public static void main (String[] args)
 BankAccount ba1=new BankAccount("Matt","Orbet",5000.00)
 
 BankAccount ba2=new BankAccount("Rebecca","Wagman",6000.00)
+
+
+-----------------------
+th:href="@{/css/bootstrap/-----}" <---tells thymeleaf to use the info in this location or replace it with that value.
+@Controller //tells the mvc this is a controller. also syntax inside the method would indicate for thymeleaf how to work with the header request. post/get.
+@RequestMap //tells that the routing of the page with certain values/parameter associated to the request. this could be header request. also this request sets up the url map within the spring mvc.
+return "index" //means mvc spring lets thymeleaf template engine knows to look for index.html file in the templates folder. another way to say that return string index is linked to the index.html in the templates folder. all the setup between the thymeleaf template engine and springframework is managed by the spring boot configuration. 
+for the changes in templates can be reflected immediately in the broswer, with bootrun=addResources =true, whereas canges in java file will need restart of the springboot server.
+th:text="${title}" --> title is a variable within the java method. this syntax tells the thymeleafe is to extract that value of the variable and use it accordingly.
+fragments, allow to borrow same codes elsewehere. fragments::"head" means replace with whatever within head tags in the gragments.html is.
+models can be used to store the data as object, java class.
+refactor means to reuse the same code elsewhere as fragments, but not to repeat the same code in every template.
+pass parameter from the controller into view to display.model passes data into the views.then control is returned to cheese/index template. cheeses arraylist is an object contains list of cheeses added by the user. this list then passed to the model via addatribute which then pass to the view thru a for loop iterate each key/value in the list to print in the html view template. iteration done by the thymeleaf via th:each syntax.@Requestmapping sets the url scheme. @RequestParam tells springboot to look for that certain parameter and pass that info to the method for further processing. in this case its the input box CheeseName-->attribute in the addcheese html file. arraylist only exist during the time of program run, once its off, then arraylist is all cleared out. thats because the database writes the data and saves it on the hard dist. arraylist is on the memory during the time of app run. a default constructor, could be used to create every single cheese with an unique id.its also called no argument constructor. static means it will be used/shared/accessible across all methods/objects within the class.
+this() will call default constructor Cheese() to assign unique id. Controller shouldnt be responsible to manage the model objects at all. CheeseData class in models will handle access and storage to cheese data objects. if all the properties of the cheese objects needed, name, description, color, texture then need to create method like getallcheeses. Cheesecontroller now uses cheesedata class. encapsulated all data operations around accessing, storing, removing, adding into the cheesedata class.cheese class dont need to know how the data is stored and the controller dont need to know how data is stored.all that info is stored and encapsulated in the cheesedata class. spring boot could use model binding to automatically creates object when the method processaddcheeseform is called. model binding creates model classes when user submits forms on the website. @requestparam takes 2 parameters, name and description and then adds to the cheese list.use @ModelAttribute to create new object contains the name, description, cheeseid based on the class fields and the default constructor. these fields must match in the input html form.@modelattribute looks for the getter and setter of the public fields. these fields are the inserted into the new object created by the spring boot.fields need to have getter and setter and default constructor for this to work. this process is called model binding. thymeleaf calls getter and setter to access the pvt fields in classes.
+@modelattribute(new cheese()) is like @modelattribute("cheese", new cheese()). modelattribute pass the data info to the view template. paramrequest get the parameters from the view to the controller. then route is also dependent on the requestmapping, which is the url. form-group is in the bootstrap.
+model valdiation.take 3 steps. first annotate the model with java built in api validation. check within controllers that model objects are valid when coming in from view. if not valid in veiw then display error message.once the validation is met, controller then added the new cheese to the datastore. @modelattribute takes the inout parameters from the views(html templates) then looks for the exact same parameters in the fields of the class/object, use getter/setters to allow the creation of new model class.
+models is a new data class object which stores all datas. 
+
+tutorial of springboot. https://spring.io/guides/gs/serving-web-content/
+
+ public String processAddCheeseForm(@ModelAttribute  @Valid Cheese newCheese,Errors errors, Model model) {//@modelattribute enables model binding to create an object from the view with post method(dont have to be explicitly say in the argument. 
+
+
+static ArrayList<Cheese> cheeses = new ArrayList<>(); in here Cheese is the object of class Cheese. 
+
+differenct between object String and Object. 
+http://stackoverflow.com/questions/2723901/whats-the-difference-between-an-object-and-string-object
+----------------------jpa----hibernate----
+dependencies are the external library needed to make the module work. starter data jpa, and mysql allows springboot to enable creating objects in database.and mysql connector allows application to interface with mysql db.  database connection needs to be configured via src/main/resources/application.properties.@Entity tells the db to prepare for the class to be added in the db, and annotation should prepare the ncessary steps take to do that. when the app starts, the springboot is to store all the fields and everything in the db unless its stated not to, in a table associated with this class. when the app runs, the springboot will look for the table in the db which corresponds to the coloumns in fields in the class, if not that it will update the table in the db. hibernate uses the default constructor. once the cheese ids removed from the java app, then the db data layer manamgement persistence engine will create it, and it can be used for id. persistent classes should have a default constructor.when an object is stored in data management layer, its id generated auto. @id and @generatedValue is a primary key private int id; this should be unique id, and should be primary key column in the db. see into to orm for the details. hibernate will manage the data creating layer in db. dao is the data access objects. dao provides access to the data objects in the data layer of the db. we wont be touching the db.it is an interface.curdrepository allows to put objects in and out of the db. it helps the transaction between the java app and db engine. it has several methods to get the objects and put the objects in db. @autowired is dependency injection.
+
+persistent 1 to many.
+in the last lesson we learned how to create a single objet in mysql db using spring data and java persistentapi annotations that was all backed up by hibernate orm engine.this lesson we will see how we can structure model objects can have relationships to each other and how those relationships can be passed over to the relational db. looking at 1 to many relationships. where one class can have several instances of another class.jpa annotationa, spring id annotation.spring id annotation. all these ids to work with mysql db. like entity, id, generated value and we configure this to work with my sql db and how that works to access thru data access object, dao, to pass data into dao which then passed onto mysqldb and then opposite direction ask the dao for object out of the db that was passed to our app. so this is a 1 class set up last time. and recall that it had a unique id this id was  given the id annotation which told hibernate that this is supposed to be a primary key in the db it was also flags with the generated value annotation which said that hibernate should generate the value of that id for us when its persisting our objects and these validations on these other fields were from previous lessons on using validation in the controllerto validate form data using model bindings so these didnt come up in our last lesson, they are been there for a while. for 1 category there are many cheeses - 1 to many relations. in the structure, has 2 cols within the table. which has a primary key.id, name. manytoone annotation will tell the mysqldb and hibernate to translate this into the category id col.joincolumn tells the db which col in the cheese table should determine the cheeses are part of this list.
+
+http://docs.jboss.org/hibernate/orm/5.2/quickstart/html_single/#hibernate-gsg-tutorial-basic-mapping
+Hibernate uses the mapping metadata to determine how to load and store objects of the persistent class. The Hibernate mapping file is one choice for providing Hibernate with this metadata. Hibernate is an Object/Relational Mapping (ORM) solution for Java environments. The term Object/Relational Mapping refers to the technique of mapping data between an object model representation to a relational data model representation.Hibernate takes care of the mapping from Java classes to database tables, and from Java data types to SQL data types. In addition, it provides data query and retrieval facilities. It can significantly reduce development time otherwise spent with manual data handling in SQL and JDBC. Hibernate’s design goal is to relieve the developer from 95% of common data persistence-related programming tasks by eliminating the need for manual, hand-crafted data processing using SQL and JDBC.
+
+
+@Entity
+@Table( name = "EVENTS" )
+public class Event {
+    ...
+}
+The @javax.persistence.Entity annotation is used to mark a class as an entity. It functions the same as the <class/> mapping element discussed in The mapping file. Additionally the @javax.persistence.Table annotation explicitly specifies the table name. Without this specification, the default table name would be EVENT.
+
+
+
+
+
+-------from stackoverflow-------------
+If a class doesn't have any constructor provided by programmer, then java compiler will add a default constructor with out parameters which will call super class constructor internally with super() call. This is called as default constructor.
+
+In your case, there is no default constructor as you are adding them programmatically. If there are no constructors added by you, then compiler generated default constructor will look like this.
+
+public Module()
+{
+   super();
+}
+
+Note: In side default constructor, it will add super() call also, to call super class constructor.
+
+Purpose of adding default constructor:
+
+Constructor's duty is to initialize instance variables, if there are no instance variables you could choose to remove constructor from your class. But when you are inheriting some class it is your class responsibility to call super class constructor to make sure that super class initializes all its instance variables properly.
+
+That's why if there are no constructors, java compiler will add a default constructor and calls super class constructor.
+
+Constructor duty is to initialize memory space, in which the object is created. The object initialization is Java Virtual Machine responsibility.
+-----------from stackoverflow-------------------
